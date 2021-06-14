@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run saikat/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "name of the project that i create in elasticbeanstalk"
+  env: "project env name of elasticbeanstalk"
+  bucket_name: "s3 bucket name"
+  bucket_path: "folder name in s3 bucket"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY # environment variable from travis
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY" # environment variable from travis
